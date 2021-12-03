@@ -27,4 +27,4 @@ for i in range(len(D[0])):
     C = C[C[:, i] == (int(C[:, i].sum()) * 2 < C.shape[0])]
     if C.shape[0] == 1: break
 
-puzzle.answer_a = to_int(O[0]) * to_int(C[0])
+puzzle.answer_b = to_int(O[0]) * to_int(C[0])
