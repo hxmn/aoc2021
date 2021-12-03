@@ -6,12 +6,8 @@ D = puzzle.input_data.splitlines()
 M = np.array([[int(c) for c in d] for d in D])
 
 
-def to_str(a: np.array):
-    return ''.join([str(int(x)) for x in a])
-
-
 def to_int(a: np.array):
-    return int(to_str(a), 2)
+    return int(''.join([str(int(x)) for x in a]), 2)
 
 
 gamma = M.sum(axis=0) > M.shape[0] / 2
