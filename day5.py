@@ -1,7 +1,6 @@
 import numpy as np
 from aocd.models import Puzzle
 
-ans_a, ans_b = None, None
 puzzle = Puzzle(year=2021, day=5)
 
 A = np.zeros((1000, 1000), dtype='int16')
