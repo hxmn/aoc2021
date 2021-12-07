@@ -9,11 +9,7 @@ pid = puzzle.input_data
 
 a = parse_arr(pid)
 for x in range(a.min(), a.max()):
-    n = np.abs((a - x))
-    if n.sum() < a_a:
-        a_a = n.sum()
-    n = (n + 1) * n // 2
-    if n.sum() < a_b:
-        a_b = n.sum()
-puzzle.answer_a = a_a
-puzzle.answer_b = a_b
+    s = np.abs(a - x)
+    a_a = min(a_a, s.sum())
+    a_b = min(a_b, ((s + 1) * s // 2).sum())
+puzzle.answer_a, puzzle.answer_b = a_a, a_b
