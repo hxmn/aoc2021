@@ -3,7 +3,7 @@ from aocd.models import Puzzle
 
 from snippets import ints
 
-a_a, a_b = 1_000_000_000, 1_000_000_000
+a_a, a_b = 1 << 63, 1 << 63
 puzzle = Puzzle(year=2021, day=7)
 pid = puzzle.input_data
 
