@@ -1,13 +1,13 @@
 import numpy as np
 from aocd.models import Puzzle
 
-from snippets import parse_arr
+from snippets import ints
 
 a_a, a_b = 1_000_000_000, 1_000_000_000
 puzzle = Puzzle(year=2021, day=7)
 pid = puzzle.input_data
 
-a = parse_arr(pid)
+a = ints(pid)
 for x in range(a.min(), a.max()):
     n = np.abs((a - x))
     if n.sum() < a_a:
