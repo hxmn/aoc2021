@@ -1,10 +1,19 @@
 import re
-from typing import List
+from typing import List, Dict
 
 import numpy as np
 
-NEI4 = np.array([[1, 0],[0, 1],[0, -1],[-1, 0]], dtype='int16')
-NEI8 = NEIGHBORS = np.array([[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]], dtype='int16')
+NEI4 = np.array([[1, 0], [0, 1], [0, -1], [-1, 0]], dtype='int16')
+
+NEI8 = NEIGHBORS = np.array([[-1, -1],
+                             [-1, 0],
+                             [-1, 1],
+                             [0, -1],
+                             [0, 1],
+                             [1, -1],
+                             [1, 0],
+                             [1, 1]], dtype='int16')
+
 ROT_LEFT_90 = np.array([[0, -1],
                         [1, 0]])
 ROT_RIGHT_90 = np.array([[0, 1],
@@ -18,6 +27,8 @@ DIRS = {
 
 cat = ''.join
 
+K = np.ones((3, 3))
+K[1, 1] = 0
 
 def neighbors(a: np.ndarray, i: int, j: int) -> np.ndarray:
     return np.array([a[i + n[0], j + n[1]] for n in NEIGHBORS], dtype=a.dtype)
@@ -37,6 +48,10 @@ def ints(inp_data: str) -> np.ndarray:
 
 def ints2(inp_data: str) -> np.ndarray:
     return np.array([ints(line) for line in inp_data.splitlines()], dtype='int64')
+
+
+def ints2m(int_data: str, m: Dict) -> np.ndarray:
+    return np.array([[m[c] for c in l] for l in int_data.splitlines()], dtype='int16')
 
 
 def blocks(inp_data: str) -> List[str]:
