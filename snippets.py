@@ -1,5 +1,5 @@
 import re
-from typing import List, Dict
+from typing import List, Dict, Union
 
 import numpy as np
 
@@ -50,8 +50,10 @@ def ints2(inp_data: str) -> np.ndarray:
     return np.array([ints(line) for line in inp_data.splitlines()], dtype='int64')
 
 
-def ints2m(int_data: str, m: Dict) -> np.ndarray:
-    return np.array([[m[c] for c in l] for l in int_data.splitlines()], dtype='int16')
+def ints2m(inp_data: Union[str, list], m: Dict) -> np.ndarray:
+    if isinstance(inp_data, str):
+        inp_data = inp_data.splitlines()
+    return np.array([[m[c] for c in l] for l in inp_data], dtype='int16')
 
 
 def blocks(inp_data: str) -> List[str]:
