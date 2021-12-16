@@ -1,5 +1,5 @@
+from more_itertools import pairwise
 from collections import Counter
-from itertools import pairwise
 
 from aocd.models import Puzzle
 
