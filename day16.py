@@ -21,40 +21,30 @@ class Packet:
 
         if self.typ == 4:
             vs = list()
-            while True:
+            t = '1'
+            while t[0] != '0':
                 t = f.read(5)
                 vs.append(t[1:])
-                if t[0] == '0':
-                    break
             self.val = int(''.join(vs), 2)
         else:
             i = f.read(1)
             if i == '0':
-                tl = int(f.read(15), 2)
-                start = f.tell()
-                while f.tell() < start + tl:
-                    self.subs.append(Packet(f))
+                end_pos = int(f.read(15), 2) + f.tell()
+                while f.tell() < end_pos: self.subs.append(Packet(f))
             else:
-                pn = int(f.read(11), 2)
-                for _ in range(pn):
-                    self.subs.append(Packet(f))
+                for _ in range(int(f.read(11), 2)): self.subs.append(Packet(f))
 
     def sum_vers(self) -> int:
         return self.ver + sum([s.sum_vers() for s in self.subs])
 
     def get_val(self) -> int:
-        if self.val is not None:
-            return self.val
-        else:
-            return reduce(lambda x, y: ops[self.typ](x, y), [v.get_val() for v in self.subs])
+        return self.val or reduce(lambda x, y: ops[self.typ](x, y), [v.get_val() for v in self.subs])
 
 
 from aocd.models import Puzzle
 
 puzzle = Puzzle(year=2021, day=16)
-pid = puzzle.input_data
-pid = ''.join([f'{int(c, 16):04b}' for c in pid])
-f = io.StringIO(pid)
-p = Packet(f)
+pid = ''.join([f'{int(c, 16):04b}' for c in puzzle.input_data])
+p = Packet(io.StringIO(pid))
 puzzle.answer_a = p.sum_vers()
 puzzle.answer_b = p.get_val()
