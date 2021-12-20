@@ -57,7 +57,7 @@ def ints2m(inp_data: Union[str, list], m: Dict) -> np.ndarray:
 
 
 def blocks(inp_data: str) -> List[str]:
-    return [x for x in re.split(r'\n\n', inp_data)]
+    return [x.strip() for x in re.split(r'\n\n', inp_data)]
 
 
 if __name__ == '__main__':
