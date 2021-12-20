@@ -11,7 +11,7 @@ img = np.array([[m[c] for c in l] for l in pid[1].splitlines()], dtype='int8')
 
 
 def convert(img,  inf):
-    img = np.pad(img, 3, constant_values=inf)
+    img = np.pad(img, 2, constant_values=inf)
     new_img = np.ones_like(img) * inf
     for i in range(1, img.shape[0] - 1):
         for j in range(1, img.shape[1] - 1):
